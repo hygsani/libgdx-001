@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector3;
 
 public class LibGDX001 extends ApplicationAdapter {
 
@@ -55,10 +56,20 @@ public class LibGDX001 extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(bucketTexture, bucket.x, bucket.y);
 		batch.end();
+
+		if (Gdx.input.isTouched()) {
+			Vector3 pos = new Vector3();
+
+			pos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
+			c.unproject(pos);
+			bucket.x = pos.x - (bucket.width / 2);
+		}
 	}
 
 	@Override
 	public void dispose () {
+		dropSound.dispose();
+		rainMusic.dispose();
 		batch.dispose();
 	}
 }
