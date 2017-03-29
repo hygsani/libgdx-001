@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 
 public class LibGDX001 extends ApplicationAdapter {
 
@@ -21,6 +22,8 @@ public class LibGDX001 extends ApplicationAdapter {
 
 	private static final int WIDTH = 800;
 	private static final int HEIGHT = 480;
+
+	private Rectangle bucket;
 
 	@Override
 	public void create () {
@@ -36,6 +39,12 @@ public class LibGDX001 extends ApplicationAdapter {
 		c.setToOrtho(false, WIDTH, HEIGHT);
 
 		batch = new SpriteBatch();
+
+		bucket = new Rectangle();
+		bucket.width = 64;
+		bucket.height = 64;
+		bucket.x = (800 / 2) - (bucket.width / 2);
+		bucket.y = 20;
 	}
 
 	@Override
@@ -44,7 +53,7 @@ public class LibGDX001 extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
-		batch.draw(bucketTexture, WIDTH / 2, HEIGHT / 2);
+		batch.draw(bucketTexture, bucket.x, bucket.y);
 		batch.end();
 	}
 
